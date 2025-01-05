@@ -10,100 +10,132 @@
 </head>
 
 <body>
+    <!-- Navbar -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <a href="index.html">Nel's Jewelry</a>
+            </div>
+            <div class="menu-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#collections">Collections</a></li>
+                <li><a href="#featured-products">New Arrivals</a></li>
+                <li><a href="#newsletter">Newsletter</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
     <style>
-        .mobile-nav {
-            display: none;
-            position: fixed;
-            top: 72px;
-            left: 0;
-            width: 100%;
+        nav {
             background: white;
-            padding: 1rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            z-index: 999;
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
-        .mobile-nav.active {
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
             display: flex;
-            flex-direction: column;
-            gap: 1rem;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .mobile-nav a {
+        .logo a {
+            font-family: var(--font-primary);
+            font-size: 1.5rem;
             color: var(--primary-color);
             text-decoration: none;
-            font-size: 1.1rem;
-            padding: 0.5rem 1rem;
+            font-weight: 600;
         }
 
-        .mobile-nav a:hover {
-            background: var(--light-bg);
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
         }
 
-        @media (min-width: 768px) {
-            .mobile-nav {
-                display: none !important;
+        nav ul li a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        .menu-icon {
+    display: none; /* Ensures it is hidden by default */
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    cursor: pointer;
+    z-index: 1001; /* Ensures it's above other elements */
+    position: relative;
+}
+
+.menu-icon span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: #1a1a1a; /* Adjust color to fit your theme */
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+        @media (max-width: 768px) {
+            .menu-icon {
+                display: flex !important;
+            }
+
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 1rem 0;
+                text-align: center;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            }
+
+            nav ul.active {
+                display: flex;
             }
         }
+        @media (max-width: 768px) {
+    .menu-icon {
+        display: flex; /* Show the menu icon for small screens */
+    }
+
+    nav ul {
+        display: none; /* Hide the full menu by default */
+    }
+
+    nav ul.active {
+        display: flex; /* Show the menu when active */
+    }
+}
+
     </style>
-    <script>
-        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
-            document.querySelector('.mobile-nav').classList.toggle('active');
-        });
-
-        // Close mobile nav when clicking outside
-        document.addEventListener('click', function(e) {
-            if (!e.target.closest('.mobile-nav') && !e.target.closest('.mobile-menu-btn')) {
-                document.querySelector('.mobile-nav').classList.remove('active');
-            }
-        });
-    </script>
-    <div class="mobile-nav">
-        <a href="collections.html">Collections</a>
-        <a href="new-arrivals.html">New Arrivals</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
-    </div>
-
-    <!-- Mobile Search (shows only on mobile) -->
-    <style>
-        .mobile-search {
-            display: none;
-            padding: 1rem;
-            background: white;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            z-index: 998;
-        }
-
-        .mobile-search .search-bar {
-            width: 100%;
-            position: relative;
-        }
-
-        .mobile-search .search-bar input {
-            width: 100%;
-            padding: 0.8rem 1rem 0.8rem 2.5rem;
-            border: 1px solid #1c1d1f;
-            border-radius: 9999px;
-            font-size: 0.9rem;
-            background: var(--light-bg);
-        }
-
-        .mobile-search .search-bar i {
-            position: absolute;
-            left: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #6a6f73;
-        }
-
-        @media (max-width: 767px) {
-            .mobile-search {
-                display: block;
-            }
-        }
-    </style>
- 
 
     <!-- Hero Section -->
     <style>
@@ -166,7 +198,7 @@
     </style>
     <section class="hero">
         <h1>Nel's Simple Jewelry</h1>
-        <a href="collections.html" class="cta-button">Discover More</a>
+        <a href="#collections" class="cta-button">Discover More</a>
     </section>
 
     <!-- Featured Products -->
@@ -215,9 +247,17 @@
             height: auto;
             object-fit: cover;
         }
+         
+        .page-title-1 {
+            text-align: center;
+            font-family: var(--font-primary);
+            font-size: 2.5rem !important;
+            margin: 3rem 0;
+            color: var(--primary-color);
+        }
     </style>
-    <section class="featured-products">
-        <h2>Featured Products</h2>
+    <section id="featured-products" class="featured-products">
+        <h2 class="page-title-1">Featured Products</h2>
         <div class="product-grid">
             <div class="product-card" style="text-align: center;">
                 <img src="img/fotor-ai-20250104214237.jpg" alt="Product 1" width="300" height="300" style="margin: 0 auto; display: block;">
@@ -309,7 +349,7 @@
 
         .newsletter-form button {
             padding: 1rem 2rem;
-            background: var(--secondary-color);
+            background: #1a1a1a;
             color: white;
             border: none;
             border-radius: 9999px;
@@ -334,8 +374,7 @@
             }
         }
     </style>
-        <link rel="stylesheet" href="styles.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
         <style>
             .collections-grid {
                 max-width: 1200px;
@@ -406,13 +445,6 @@
                 }
            }
     
-          footer {
-                background-color: var(--primary-color);
-                color: white;
-                padding: 4rem 2rem 2rem;
-                margin-top: 4rem;
-            }
-    
             .footer-content {
                 max-width: 1200px;
                 margin: 0 auto;
@@ -478,7 +510,7 @@
         </style>
     <h1 class="page-title">Our Collections</h1>
 
-    <div class="collections-grid">
+    <div id="collections" class="collections-grid">
         <div class="collection-card">
             <img src="img/fotor-ai-20250104214237.jpg" alt="Necklaces Collection">
             <div class="collection-overlay">
@@ -785,8 +817,8 @@
             }
         }
         .submit {
-            color: rgb(176, 94, 209);
-            background-color: rgb(174, 161, 247);
+            color: #ffffff;
+            background-color: #1a1a1a;
             border: none;
             border-radius: 8px;
             cursor: pointer;
@@ -796,14 +828,14 @@
             height: 40px;
         }
     </style>
-    <section class="contact-section">
+    <section id="contact" class="contact-section">
         <h2>Contact Us</h2>
         <div class="contact-grid">
             <div class="contact-info">
                 <h3>Get in Touch</h3>
-                <p><i class="fas fa-map-marker-alt"></i> Prtoria,SA</p>
-                <p><i class="fas fa-phone"></i> (+27) 123-4567</p>
-                <p><i class="fas fa-envelope"></i> info@nelsjewelry.com</p>
+                <p><i class="fas fa-map-marker-alt"></i> Pretoria,SA</p>
+                <p><i class="fas fa-phone"></i> (+27) 788246963</p>
+                <p><i class="fas fa-envelope"></i> nelsjewelry@gmail.com</p>
                 <p><i class="fas fa-clock"></i> Monday - Saturday: 10:00 AM - 8:00 PM</p>
                 <p><i class="fas fa-clock"></i> Sunday: 12:00 PM - 6:00 PM</p>
             </div>
@@ -832,7 +864,7 @@
             </div>
         </div>
     </section>
-    <section class="newsletter">
+    <section id="newsletter" class="newsletter">
         <h2>Stay Updated</h2>
         <p>Subscribe to our newsletter for updates and exclusive offers</p>
         <form class="newsletter-form">
@@ -842,66 +874,7 @@
     </section>
 
     <!-- Footer -->
-    <style>
-        footer {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 4rem 2rem 2rem;
-            margin-top: 4rem;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: center;
-            gap: 4rem;
-            flex-wrap: wrap;
-        }
-
-        .footer-section {
-            min-width: 200px;
-        }
-
-        .footer-section h3 {
-            font-family: var(--font-primary);
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-            font-weight: 500;
-        }
-
-        .footer-section ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .footer-section ul li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-section ul li a {
-            color: var(--accent-color);
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: color 0.3s ease;
-        }
-
-        .footer-section ul li a:hover {
-            color: var(--secondary-color);
-        }
-
-        .footer-bottom {
-            text-align: center;
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .footer-bottom p {
-            font-size: 0.9rem;
-            color: var(--accent-color);
-        }
-
+<style>
         @media (max-width: 768px) {
             .footer-content {
                 gap: 2rem;
@@ -936,29 +909,30 @@
         }
     </style>
     <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>About</h3>
-                <ul>
-                    <li><a href="#">Our Story</a></li>
-                    <li><a href="#">Packaging</a></li>
-                    <li><a href="#">Planet</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Policies</h3>
-                <ul>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms & Conditions</a></li>
-                    <li><a href="#">Shipping & Returns</a></li>
-                </ul>
-            </div>
-        </div>
         <div class="footer-bottom">
             <p>&copy; 2025 Nel's Jewelry. All rights reserved.</p>
         </div>
     </footer>
-    <script src="script.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuIcon = document.querySelector('.menu-icon');
+            const menu = document.querySelector('nav ul');
+            
+            menuIcon.addEventListener('click', function(e) {
+                e.stopPropagation();
+                menu.classList.toggle('active');
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.menu-icon') && !e.target.closest('nav ul')) {
+                    menu.classList.remove('active');
+                }
+            });
+        });
+    </script>
+
 </body>
 
 </html>
